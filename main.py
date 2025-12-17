@@ -85,3 +85,27 @@ history = model.fit(
     validation_steps=val_generator.samples // batch_size,
     epochs=10
 )
+
+# Evaluate the model
+test_loss, test_accuracy = model.evaluate(test_generator, steps=test_generator.samples // batch_size)
+print(f'Test accuracy: {test_accuracy * 100:.2f}%')
+
+# Plot training & validation accuracy values
+plt.figure(figsize=(12, 4))
+plt.subplot(1, 2, 1)
+plt.plot(history.history['accuracy'])
+plt.plot(history.history['val_accuracy'])
+plt.title('Model Accuracy')
+plt.ylabel('Accuracy')
+plt.xlabel('Epoch')
+plt.legend(['Train', 'Validation'], loc='upper left')
+
+# Plot training & validation loss values
+plt.subplot(1, 2, 2)
+plt.plot(history.history['loss'])
+plt.plot(history.history['val_loss'])
+plt.title('Model Loss')
+plt.ylabel('Loss')
+plt.xlabel('Epoch')
+plt.legend(['Train', 'Validation'], loc='upper left')
+plt.show()
